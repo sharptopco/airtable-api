@@ -1,3 +1,4 @@
 node_modules
 .env
 lambda-payloads.json
+env.js

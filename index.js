@@ -1,28 +1,20 @@
 'use strict';
 
-// require('dotenv').config();
+var env = process.env
+if (env.NODE_ENV !== 'production') {
+    env = require('./env');
+}
+
 var Airtable = require('airtable')
 const ALLOWED_BASES = ['app0ZJgZxm6LC8rBB', 'appNtmri6lpYTOimo'] // CR Stories
 const ALLOWED_TABLES = {
     app0ZJgZxm6LC8rBB : ['Stories', 'Subjects', 'Lessons', 'Lesson Subjects'],
     appNtmri6lpYTOimo : ['Teams', 'Games']
 }
-
-// var fs = require('fs');
- 
-// var contents = fs.readFileSync('DATA', 'utf8');
-console.log(`__dirname ${__dirname}`);
-
-// console.log('after calling readFile');
-
-// console.log(process.env);
-// console.log(`\nAIRTABLE_KEY: ${process.env.AIRTABLE_KEY}`);
-
-
-Airtable.configure({ apiKey: 'keyKL1QIgxY04B2PB' })
+Airtable.configure({ apiKey: env.AIRTABLE_KEY })
 
 exports.handler = function(event, context, callback) {
-    
+
     if (event.body) {
         event = JSON.parse(event.body);
     }
@@ -41,13 +33,12 @@ exports.handler = function(event, context, callback) {
     
     var base = new Airtable().base(event.baseId);
     var table = base.table(event.tableName)
-    console.log('eggs!')
 
     switch(event.action) {
         case "select":
             table.select().firstPage().then(records => { 
                 console.log(`${records.length} records returned.`)
-                console.log(records)
+                // console.log(records)
                 let body = []
                 records.forEach( element => {
                     element.fields.id = element.id
