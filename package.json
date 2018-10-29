@@ -1,0 +1,16 @@
+{
+  "name": "airtable-api",
+  "version": "1.0.0",
+  "description": "API for Airtable desirgned to be run in AWS Lambda",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tony Erskine",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sharptopco/airtable-api.git"
+  },
+  "dependencies": {}
+}
